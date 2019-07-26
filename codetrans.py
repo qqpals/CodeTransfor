@@ -8,7 +8,7 @@ __author__ = 'Jerry'
 import os
 import sys
 
-'''
+
 def getfile(file_dir):
     filesList = []
     for root, dirs, files in os.walk(file_dir):
@@ -17,26 +17,17 @@ def getfile(file_dir):
                 #L.append(os.path.join(root, file))
                 filesList.append(file)
     return filesList
-'''
-def code_chage(filename):
 
-    os.system( "dos2unix {}".format(filename))
-    portion = os.path.splitext(filename)
-    str = "iconv -f 'gbk' -t 'utf-8' {} > {}".format(filename, portion[0] + '-1' + '.srt')
-    os.system(str)
-    #ps = subprocess.Popen(str)
-    #ps.wait()
-
-
+def code_chage(files_list):
+    for filename in files_list:
+        os.system( "dos2unix '{}' >/dev/null 2>&1".format(filename))
+        portion = os.path.splitext(filename)
+        os.system("iconv -f 'gbk' -t 'utf-8' '{}' > '{}'".format(filename, portion[0] + '-1' + '.srt'))
     return
 
 def main():
-    #files_list = getfile('.')
-
-    if(len(sys.argv) != 2):
-        print("please input filename!")
-    else:
-        code_chage(sys.argv[1])
+    files_list = getfile('.')
+    code_chage(files_list)
 
 if __name__ == '__main__':
     main()
