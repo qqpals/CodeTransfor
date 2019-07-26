@@ -20,9 +20,9 @@ def getfile(file_dir):
 
 def code_chage(files_list):
     for filename in files_list:
-        os.system( "dos2unix '{}' >/dev/null 2>&1".format(filename))
+        os.system( 'dos2unix "{}" >/dev/null 2>&1'.format(filename))
         portion = os.path.splitext(filename)
-        os.system("iconv -f 'gbk' -t 'utf-8' '{}' > '{}'".format(filename, portion[0] + '-1' + '.srt'))
+        os.system('iconv -f "gbk" -t "utf-8" "{}" > "{}"'.format(filename, portion[0] + '-1' + '.srt'))
     return
 
 def main():
